@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
       const userData = response.data.user;
 
       await AsyncStorage.setItem("token", token);
+        await AsyncStorage.setItem("user", JSON.stringify(userData));
 
       setUser(userData);
       return { success: true };
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem("user");
+    await AsyncStorage.removeItem("token");
     setUser(null);
   };
 
