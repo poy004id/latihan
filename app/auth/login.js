@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
@@ -16,14 +17,20 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (!username || !password) return;
-
     setLoading(true);
+    try {
+      // Simulate a login request
+      const response = await axios.post("https://app.mockfly.dev/699bb1fbd3b59fe5e237931c/login", {
+        username,
+        password,
+      });
+      console.log("Login successful:", response.data);
 
-    // simulasi API
-    setTimeout(() => {
-      console.log("Login:", { username, password });
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
 return (
