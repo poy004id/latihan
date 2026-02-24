@@ -26,54 +26,55 @@ export default function LoginScreen() {
     }, 1500);
   };
 
-  return (
+return (
     <View style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Content>
-          <Text variant="headlineMedium" style={styles.title}>
-            Login
-          </Text>
+        <Card style={styles.card}>
+            <Card.Content>
+                <Text variant="headlineMedium" style={styles.title}>
+                    Login
+                </Text>
 
-          <TextInput
-            label="Username"
-            mode="outlined"
-            value={username}
-            onChangeText={setUsername}
-            style={styles.input}
-            autoCapitalize="none"
-          />
+                <TextInput
+                    label="Username"
+                    mode="outlined"
+                    value={username}
+                    onChangeText={setUsername}
+                    style={styles.input}
+                    autoCapitalize="none"
+                />
 
-          <TextInput
-            label="Password"
-            mode="outlined"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={secureText}
-            style={styles.input}
-            right={
-              <TextInput.Icon
-                icon={secureText ? "eye-off" : "eye"}
-                onPress={() => setSecureText(!secureText)}
-              />
-            }
-          />
 
-          <Button
-            mode="contained"
-            onPress={handleLogin}
-            disabled={loading}
-            style={styles.button}
-          >
-            {loading ? <ActivityIndicator animating /> : "Login"}
-          </Button>
+                <TextInput
+                    label="Password"
+                    mode="outlined"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={secureText}
+                    style={styles.input}
+                    right={
+                        <TextInput.Icon
+                            icon={secureText ? "eye-off" : "eye"}
+                            onPress={() => setSecureText(!secureText)}
+                        />
+                    }
+                />
 
-          <Button mode="text" style={styles.forgot}>
-            Forgot Password?
-          </Button>
-        </Card.Content>
-      </Card>
+                <Button
+                    mode="contained"
+                    onPress={handleLogin}
+                    disabled={loading}
+                    style={styles.button}
+                >
+                    {loading ? <ActivityIndicator animating /> : "Login"}
+                </Button>
+
+                <Button mode="text" style={styles.forgot}>
+                    Forgot Password?
+                </Button>
+            </Card.Content>
+        </Card>
     </View>
-  );
+);
 }
 
 const styles = StyleSheet.create({
