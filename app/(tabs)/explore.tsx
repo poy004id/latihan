@@ -1,15 +1,17 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
-import { Collapsible } from '@/components/ui/collapsible';
 import { ExternalLink } from '@/components/external-link';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { Collapsible } from '@/components/ui/collapsible';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
-
+import { useAuth } from '@/context/AuthContext';
+import { Button } from 'react-native-paper';
 export default function TabTwoScreen() {
+  const {logout} = useAuth()
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -21,6 +23,9 @@ export default function TabTwoScreen() {
           style={styles.headerImage}
         />
       }>
+        <Button mode="contained" onPress={logout} style={{marginBottom: 16}}>
+          Logout
+        </Button>
       <ThemedView style={styles.titleContainer}>
         <ThemedText
           type="title"

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
@@ -9,22 +9,23 @@ import {
 } from "react-native-paper";
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("user1");
+  const [password, setPassword] = useState("password123");
   const [secureText, setSecureText] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     if (!username || !password) return;
     setLoading(true);
     try {
-    
-      const response = await axios.post("https://api.mockfly.dev/mocks/838461a3-ce16-45c6-ad65-3c409d160449/login", {
-        username,
-        password,
-      });
-      console.log("Login successful:", response?.data);
-
+        const response = await login(username, password);
+        if (response.success) {
+          console.log("Login successful:", response);
+        } else {
+          console.log("Login failed:", response.message);
+        }
     } catch (error) {
       console.log("Login failed:", error);
       console.log("Login failed:", error?.response?.data || error.message);
