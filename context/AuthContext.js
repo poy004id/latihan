@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
       });
+
       const token = response.data.token;
       const userData = response.data.user;
 

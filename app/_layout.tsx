@@ -1,3 +1,4 @@
+import { AuthProvider, useAuth } from "@/context/AuthContext";
 import {
   DarkTheme,
   DefaultTheme,
@@ -19,33 +20,43 @@ export const unstable_settings = {
   anchor: "(tabs)",
 };
 
-export default function RootLayout() {
+function RootNavigator() {
   const colorScheme = useColorScheme();
   console.log("Color Scheme:", colorScheme);
-  const isLoggedIn = false;
+  const { isAuthenticated } = useAuth();
 
   return (
     <PaperProvider
       theme={colorScheme === "dark" ? MD3DarkTheme : MD3LightTheme}
     >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+          <Stack>
+            <Stack.Protected guard={isAuthenticated}>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="modal"
+                options={{ presentation: "modal", title: "Modal" }}
+              />
+            </Stack.Protected>
 
-          <Stack.Protected guard={isLoggedIn}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="modal"
-              options={{ presentation: "modal", title: "Modal" }}
-            />
-          </Stack.Protected>
-
-          <Stack.Protected guard={!isLoggedIn}>
-            <Stack.Screen name="auth/login" options={{ headerShown: false }} />
-          </Stack.Protected>
-        </Stack>
-
+            <Stack.Protected guard={!isAuthenticated}>
+              <Stack.Screen
+                name="auth/login"
+                options={{ headerShown: false }}
+              />
+            </Stack.Protected>
+          </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
     </PaperProvider>
+  );
+}
+
+
+export default function RootLayout() {
+  return (
+    <AuthProvider>
+      <RootNavigator />
+    </AuthProvider>
   );
 }
