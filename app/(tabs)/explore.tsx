@@ -18,7 +18,7 @@ export default function TabTwoScreen() {
   const {logout} = useAuth()
   const [jadwalDokter, setJadwalDokter] = useState([]);
 
-  const getJadwalDDokter = async () => {
+  const getJadwalDokter = async () => {
     try {
       const response = await apiservice.get('/jadwal-dokter');
       console.log('Jadwal Dokter:', response.data);
@@ -29,7 +29,7 @@ export default function TabTwoScreen() {
   }
 
   useEffect(() => {
-    getJadwalDDokter();
+    getJadwalDokter();
   }, []);
 
 
