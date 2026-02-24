@@ -2,11 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
-    ActivityIndicator,
     Button,
     Card,
     Text,
-    TextInput,
+    TextInput
 } from "react-native-paper";
 
 export default function LoginScreen() {
@@ -50,7 +49,6 @@ return (
                     autoCapitalize="none"
                 />
 
-
                 <TextInput
                     label="Password"
                     mode="outlined"
@@ -71,8 +69,9 @@ return (
                     onPress={handleLogin}
                     disabled={loading}
                     style={styles.button}
+                    loading={loading}
                 >
-                    {loading ? <ActivityIndicator animating /> : "Login"}
+                     Login
                 </Button>
 
                 <Button mode="text" style={styles.forgot}>
