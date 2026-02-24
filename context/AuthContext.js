@@ -48,10 +48,6 @@ export const AuthProvider = ({ children }) => {
       // simpan securely
       await SecureStore.setItemAsync(TOKEN_KEY, token);
       await SecureStore.setItemAsync(USER_KEY, JSON.stringify(userData));
-
-      // set axios default header
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
       setUser(userData);
 
       return { success: true };

@@ -22,7 +22,6 @@ export const unstable_settings = {
 
 function RootNavigator() {
   const colorScheme = useColorScheme();
-  console.log("Color Scheme:", colorScheme);
   const { isAuthenticated } = useAuth();
 
   return (

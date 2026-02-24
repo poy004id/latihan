@@ -10,8 +10,31 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from 'react-native-paper';
+import apiservice from '../../services/apiService'; // Import the API service
+
+import { useEffect, useState } from 'react';
+
 export default function TabTwoScreen() {
   const {logout} = useAuth()
+  const [jadwalDokter, setJadwalDokter] = useState([]);
+
+  const getJadwalDDokter = async () => {
+    try {
+      const response = await apiservice.get('/jadwal-dokter');
+      console.log('Jadwal Dokter:', response.data);
+      setJadwalDokter(response.data);
+    } catch (error) {
+      console.error('Error fetching Jadwal Dokter:', error);
+    }
+  }
+
+  useEffect(() => {
+    getJadwalDDokter();
+  }, []);
+
+
+  console.log('explote screen loaded', jadwalDokter);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
