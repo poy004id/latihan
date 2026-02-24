@@ -18,15 +18,16 @@ export default function LoginScreen() {
     if (!username || !password) return;
     setLoading(true);
     try {
-      // Simulate a login request
-      const response = await axios.post("https://app.mockfly.dev/699bb1fbd3b59fe5e237931c/login", {
+    
+      const response = await axios.post("https://api.mockfly.dev/mocks/838461a3-ce16-45c6-ad65-3c409d160449/login", {
         username,
         password,
       });
-      console.log("Login successful:", response.data);
+      console.log("Login successful:", response?.data);
 
     } catch (error) {
-      console.error("Login failed:", error);
+      console.log("Login failed:", error);
+      console.log("Login failed:", error?.response?.data || error.message);
     } finally {
       setLoading(false);
     }
